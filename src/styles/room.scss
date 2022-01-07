@@ -13,6 +13,10 @@
       > img {
         max-height: 45px;
       }
+
+      > button {
+        padding-right: 0;
+      }
     }
   }
 
@@ -62,7 +66,25 @@
       align-items: center;
       margin-top: 16px;
 
-      span {
+      .user-info {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+
+        span {
+          margin-left: 8px;
+          color: #fefefe;
+          font-weight: 500;
+          font-size: 14px;
+        }
+      }
+
+      > span {
         font-size: 14px;
         font-weight: 500;
         display: flex;
