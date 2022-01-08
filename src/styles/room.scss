@@ -17,6 +17,15 @@
       > button {
         padding-right: 0;
       }
+
+      > div {
+        display: flex;
+        gap: 16px;
+
+        button {
+          height: 40px;
+        }
+      }
     }
   }
 
@@ -58,6 +67,10 @@
         min-height: 130px;
         outline: none;
       }
+    }
+
+    .question-list {
+      margin-top: 16px;
     }
 
     .form-footer {

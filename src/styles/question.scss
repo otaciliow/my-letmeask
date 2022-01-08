@@ -1,0 +1,66 @@
+.question {
+  background: #31313e;
+  border-radius: 8px;
+  border: 1px solid #835afd;
+  color: #fefefe;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  padding: 24px;
+
+  // toda vez que uma nova question vier depois da question anterior, essas propriedades serão aplicadas:
+  & + .question {
+    margin-top: 8px;
+  }
+
+  p {
+    color: #fefefe;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      span {
+        margin-left: 8px;
+        color: #a8a8b3;
+        font-size: 14px;
+      }
+    }
+
+    button {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+
+      &.like-button {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+
+        &.liked {
+          color: #835afd;
+
+          svg path {
+            stroke: #835afd;
+          }
+        }
+      }
+
+      &:hover {
+        filter: brightness(0.8);
+        transition: filter(0.2s);
+      }
+    }
+  }
+}
