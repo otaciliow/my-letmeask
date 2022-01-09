@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import logoImg from '../assets/images/logo.svg';
 import deleteImg from '../assets/images/delete.svg';
+import checkImg from '../assets/images/check.svg';
+import answerImg from '../assets/images/answer.svg';
 
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
@@ -44,6 +46,19 @@ export function AdminRoom() {
         }
     }
 
+    async function handleCheckQuestionAsAnswered(questionId: string) {
+        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+            isAnswered: true,
+            isHighlighted: false,
+        });
+    }
+
+    async function handleHighlightQuestion(questionId: string) {
+        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+            isHighlighted: true,
+        });
+    }
+
     return (
         <div id="page-room">
             <header>
@@ -66,10 +81,22 @@ export function AdminRoom() {
                 {/* ou seja: executa ações para cada item dentro de uma matriz ou vetor */}
                 {questions.map(question => {
                     return (
-                        <Question key={question.id} content={question.content} author={question.author} >
-                            <button type="button" onClick={ () => {handleDeleteQuestion(question.id)} }>
-                                <img src={deleteImg} alt="Remover pergunta" />
-                            </button>
+                        <Question key={question.id} content={question.content} author={question.author} isAnswered={question.isAnswered} isHighlighted={question.isHighlighted}>
+                                {/* se a pergunta não tiver sido respondida, os botões de highlight e read serão exibidos */}
+                                {/* senão, eles serão escondidos */}
+                                {!question.isAnswered && (
+                                    <>
+                                        <button type="button" onClick={ () => {handleCheckQuestionAsAnswered(question.id)} }>
+                                            <img src={checkImg} alt="Marcar pergunta como respondida" />
+                                        </button>
+                                        <button type="button" onClick={ () => {handleHighlightQuestion(question.id)} }>
+                                            <img src={answerImg} alt="Destacar pergunta" />
+                                        </button>
+                                    </>
+                                )}
+                                <button type="button" onClick={ () => {handleDeleteQuestion(question.id)} }>
+                                    <img src={deleteImg} alt="Remover pergunta" />
+                                </button>
                         </Question>
                         // é necessário passar uma key para os elementos do map, para que o react saiba qual é cada opção
                     )
